@@ -212,6 +212,7 @@
             label7.Size = new Size(188, 28);
             label7.TabIndex = 23;
             label7.Text = "View Expenses";
+            label7.Click += label7_Click;
             // 
             // UAddBtn
             // 

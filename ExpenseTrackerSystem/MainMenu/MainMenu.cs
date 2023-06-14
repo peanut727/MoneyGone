@@ -17,6 +17,8 @@ namespace ExpenseTrackerSystem
         {
             InitializeComponent();
             addexpense1.Hide();
+            //for time and date to auto update
+            timer1.Start();
             usrLBL.Text = Login.User + "!";
 
         }
@@ -59,5 +61,12 @@ namespace ExpenseTrackerSystem
         {
             Application.Exit();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            monthlbl.Text = DateTime.Now.ToString();
+        }
+
+       
     }
 }

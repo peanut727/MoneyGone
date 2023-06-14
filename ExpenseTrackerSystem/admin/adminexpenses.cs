@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace BudgetBuddy
 {
     public partial class adminexpenses : Form
@@ -18,7 +19,9 @@ namespace BudgetBuddy
             InitializeComponent();
             ShowExpenses();
         }
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+
+        SqlConnection con = DBConnection.GetConnection();
+
         private void ShowExpenses()
         {
             con.Open();
@@ -34,8 +37,6 @@ namespace BudgetBuddy
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            users user = new users();
-            user.Show();
         }
     }
 }

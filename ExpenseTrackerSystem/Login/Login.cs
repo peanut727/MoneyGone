@@ -7,18 +7,37 @@ namespace ExpenseTrackerSystem
 {
     public partial class Login : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = DBConnection.GetConnection();
         public Login()
         {
             InitializeComponent();
             about1.Hide();
             splash1.Show();
             splash1.BringToFront();
+            string DBmdf = @"C:\Users\Public\Desktop\ExpenseDB.mdf";
+           
+
+            // checks if the DB file exists on the specified path if not then its gonna copy paste it
+            if (File.Exists(DBmdf))
+            {
+                
+            }
+            else
+            {
+                
+                string expPath = Path.Combine(Application.StartupPath, "ExpenseDB.mdf");
+                string targetPath = @"C:\Users\Public\Desktop\ExpenseDB.mdf";
+                string log = Path.Combine(Application.StartupPath, "ExpenseDB_log.ldf");
+                string logpath = @"C:\Users\Public\Desktop\ExpenseDB_log.ldf";
+                File.Copy(expPath, targetPath, true);
+                File.Copy(log, logpath, true);
+            }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void label6_Click(object sender, EventArgs e)

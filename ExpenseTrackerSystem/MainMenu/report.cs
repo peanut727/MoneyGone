@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BudgetBuddy.sqldata;
 using System.Data.SqlClient;
 using System.Xml.Serialization;
 using System.Linq.Expressions;
@@ -18,7 +17,7 @@ namespace BudgetBuddy
 
     public partial class report : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = DBConnection.GetConnection();
         public report()
         {
             InitializeComponent();
@@ -37,7 +36,13 @@ namespace BudgetBuddy
             SqlDataAdapter sda = new SqlDataAdapter("select MAx(ExpAmt) from ExpenseTbl where ExpUser='" + Login.User + "'", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            MaxLbl.Text = "PHP" + dt.Rows[0][0].ToString();
+            string value = dt.Rows[0][0].ToString();
+            decimal moneyval;
+
+            if (Decimal.TryParse(value, out moneyval))
+            {
+                MaxLbl.Text = moneyval.ToString("C");
+            }
             con.Close();
         }
         private void GetMinExp()
@@ -46,7 +51,13 @@ namespace BudgetBuddy
             SqlDataAdapter sda = new SqlDataAdapter("select Min(ExpAmt) from ExpenseTbl where ExpUser='" + Login.User + "'", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            MinLbl.Text = "PHP" + dt.Rows[0][0].ToString();
+            string value = dt.Rows[0][0].ToString();
+            decimal moneyval;
+
+            if (Decimal.TryParse(value, out moneyval))
+            {
+                MinLbl.Text = moneyval.ToString("C");
+            }
             con.Close();
         }
         private void GetAvgExp()
@@ -60,14 +71,24 @@ namespace BudgetBuddy
                 DataTable dt1 = new DataTable();
                 sda.Fill(dt);
                 sda1.Fill(dt1);
-                double Avg = Convert.ToDouble(dt.Rows[0][0].ToString()) / Convert.ToDouble(dt1.Rows[0][0].ToString());
-                AvgLbl.Text = "PHP" + Avg;
-                CountLbl.Text = dt1.Rows[0][0].ToString();
+
+                decimal total = 0;
+                int count = 0;
+
+                if (dt.Rows.Count > 0 && dt1.Rows.Count > 0)
+                {
+                    decimal.TryParse(dt.Rows[0][0].ToString(), out total);
+                    int.TryParse(dt1.Rows[0][0].ToString(), out count);
+                }
+
+                decimal avg = count > 0 ? total / count : 0;
+                AvgLbl.Text = avg.ToString("C");
+                CountLbl.Text = count.ToString();
                 con.Close();
             }
             catch (Exception ex)
             {
-                
+                con.Close();
             }
         }
         private void GetTotExp()
@@ -76,7 +97,13 @@ namespace BudgetBuddy
             SqlDataAdapter sda = new SqlDataAdapter("select Sum(ExpAmt) from ExpenseTbl where ExpUser='" + Login.User + "'", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            TotalLbl.Text = "PHP" + dt.Rows[0][0].ToString();
+            string value = dt.Rows[0][0].ToString();
+            decimal moneyval;
+
+            if (Decimal.TryParse(value, out moneyval))
+            {
+                TotalLbl.Text = moneyval.ToString("C");
+            }
             con.Close();
         }
         private void GetTotExpCat()
@@ -85,8 +112,18 @@ namespace BudgetBuddy
             SqlDataAdapter sda = new SqlDataAdapter("select Sum(ExpAmt) from ExpenseTbl where ExpUser='" + Login.User + "' and ExpCat='"+expCateg.SelectedItem.ToString()+"'", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            APCount.Text = "PHP" + dt.Rows[0][0].ToString();
-            APCount.Visible = true;
+            string value = dt.Rows[0][0].ToString();
+            decimal moneyval;
+
+            if (Decimal.TryParse(value, out moneyval))
+            {
+                APCount.Text = moneyval.ToString("C");
+                APCount.Visible = true;
+            }
+            else
+            {
+                APCount.Text = "";
+            }
             con.Close();
         }
 

@@ -14,7 +14,7 @@ namespace ExpenseTrackerSystem
 {
     public partial class adminlogin : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = DBConnection.GetConnection();
         public adminlogin()
         {
             InitializeComponent();

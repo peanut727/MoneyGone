@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BudgetBuddy.sqldata;
 using System.Globalization;
 
 namespace BudgetBuddy
@@ -22,10 +21,7 @@ namespace BudgetBuddy
             ShowExpenses();
             GetTotExp();
         }
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
-
-
-
+        SqlConnection con = DBConnection.GetConnection();
         private void GetTotExp()
         {
 
@@ -33,7 +29,14 @@ namespace BudgetBuddy
             SqlDataAdapter sda = new SqlDataAdapter("select Sum(ExpAmt) from ExpenseTbl where ExpUser='" + Login.User + "'", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            totamnt.Text = "PHP" + dt.Rows[0][0].ToString();
+            string value = dt.Rows[0][0].ToString();
+            decimal moneyval;
+
+            if (Decimal.TryParse(value, out moneyval))
+            {
+               totamnt.Text = moneyval.ToString("C");
+            }
+            //totamnt.Text = "PHP" + dt.Rows[0][0].ToString();
             con.Close();
         }
 
@@ -88,6 +91,7 @@ namespace BudgetBuddy
         private void button1_Click(object sender, EventArgs e)
         {
             ShowExpenses();
+            GetTotExp();
         }
     }
 }

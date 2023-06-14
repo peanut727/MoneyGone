@@ -1,5 +1,4 @@
-﻿using BudgetBuddy.sqldata;
-using ExpenseTrackerSystem;
+﻿using ExpenseTrackerSystem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +15,7 @@ namespace BudgetBuddy
 {
     public partial class addexpense : UserControl
     {
+        SqlConnection con = DBConnection.GetConnection();
         public addexpense()
         {
             InitializeComponent();
@@ -65,18 +65,7 @@ namespace BudgetBuddy
                     con.Close();
                     clear();
                 }
-
-
-
-
-
             }
-
-
-
-
-
-
         }
     }
 }

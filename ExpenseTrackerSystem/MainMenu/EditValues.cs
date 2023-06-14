@@ -20,8 +20,8 @@ namespace BudgetBuddy
             InitializeComponent();
 
         }
-
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        // SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = DBConnection.GetConnection();
         private void button2_Click(object sender, EventArgs e)
         {
             int amount = Convert.ToInt32(expAmountTB.Text);

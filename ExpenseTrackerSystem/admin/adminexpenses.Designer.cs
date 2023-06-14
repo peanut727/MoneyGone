@@ -77,7 +77,7 @@
             // 
             adminexDGV.BackgroundColor = Color.Ivory;
             adminexDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            adminexDGV.Location = new Point(36, 115);
+            adminexDGV.Location = new Point(36, 103);
             adminexDGV.Name = "adminexDGV";
             adminexDGV.RowTemplate.Height = 25;
             adminexDGV.Size = new Size(732, 429);

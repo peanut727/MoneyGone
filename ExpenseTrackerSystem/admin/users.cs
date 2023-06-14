@@ -15,7 +15,7 @@ namespace BudgetBuddy
 {
     public partial class users : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\peanut\Documents\ExpenseDB.mdf;Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = DBConnection.GetConnection();
         public users()
         {
             InitializeComponent();
@@ -145,6 +145,12 @@ namespace BudgetBuddy
                 MessageBox.Show("Invalid Values");
                 con.Close();
             }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            adminexpenses ae = new adminexpenses();
+            ae.Show();
         }
     }
 }

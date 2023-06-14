@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainmem));
             panel1 = new Panel();
             button3 = new Button();
@@ -36,17 +37,19 @@
             button4 = new Button();
             addexpense1 = new BudgetBuddy.addexpense();
             panel2 = new Panel();
+            monthlbl = new Label();
+            pictureBox2 = new PictureBox();
             usrLBL = new Label();
             nameLBL = new Label();
             label3 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -134,6 +137,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Ivory;
+            panel2.Controls.Add(monthlbl);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(usrLBL);
             panel2.Controls.Add(nameLBL);
@@ -145,6 +149,28 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(704, 491);
             panel2.TabIndex = 5;
+            // 
+            // monthlbl
+            // 
+            monthlbl.AutoSize = true;
+            monthlbl.Font = new Font("Arial Rounded MT Bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            monthlbl.ForeColor = Color.ForestGreen;
+            monthlbl.Location = new Point(3, 450);
+            monthlbl.Name = "monthlbl";
+            monthlbl.Size = new Size(88, 33);
+            monthlbl.TabIndex = 10;
+            monthlbl.Text = "Hello";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(607, -13);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(127, 78);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 9;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // usrLBL
             // 
@@ -212,16 +238,9 @@
             label1.TabIndex = 3;
             label1.Text = "Money Gone";
             // 
-            // pictureBox2
+            // timer1
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(607, -13);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(127, 78);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 9;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            timer1.Tick += timer1_Tick;
             // 
             // mainmem
             // 
@@ -240,8 +259,8 @@
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -261,5 +280,7 @@
         private Label label3;
         private Label usrLBL;
         private PictureBox pictureBox2;
+        private Label monthlbl;
+        private System.Windows.Forms.Timer timer1;
     }
 }
